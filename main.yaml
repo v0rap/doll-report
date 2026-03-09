@@ -1,0 +1,10 @@
+---
+- name: Configure doll report
+  hosts: all
+  pre_tasks:
+  - name: include dashboard vars
+    ansible.builtin.include_vars:
+      dir: dashboards/
+  roles:
+    - report.application.gatus
+  become: yes
