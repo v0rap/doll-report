@@ -138,4 +138,3 @@ dashboards:
         conditions:
           - "[CONNECTED] == true"
         group: "infrastructure"
-
