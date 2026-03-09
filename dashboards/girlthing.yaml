@@ -1,9 +1,140 @@
 ---
 dashboards:
   girlthing:
+    ui:
+      title: "girlthi.ng status"
+      header: "girlthing.doll.report"
+      # dashboard-heading: "girlthi.ng and doll.rehab status"
+      dashboard-subheading: "Service Status"
+      logo: "https://girlthi.ng/~aperture/img/girlthing-heart.png"
+      favicon:
+        default: "https://girlthi.ng/~aperture/img/girlthing-heart.png"
+        size16x16: "https://girlthi.ng/~aperture/img/girlthing-heart.png"
+        size32x32: "https://girlthi.ng/~aperture/img/girlthing-heart.png"
+      default-sort-by: group
+      custom-css: |2
+        body {
+          font-family: monospace;
+        }
+
+    storage:
+      type: sqlite
+      caching: true
+      path: /status_history/history.db
+
     endpoints:
-      - name: sk.girlthi.ng
+      - name: sharkey
         url: https://sk.girlthi.ng
-        interval: 30s
+        interval: 10s
         conditions:
           - "[STATUS] == 200"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+        group: "services"
+
+      - name: ircd
+        url: tls://irc.girlthi.ng:6697
+        interval: 10s
+        conditions:
+          - "[CONNECTED] == true"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+        group: "services"
+
+      - name: desktop.girtlhi.ng
+        url: https://desktop.girlthi.ng
+        interval: 10s
+        conditions:
+          - "[STATUS] == 200"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+        group: "services"
+
+
+      - name: mumble
+        url: udp://miserable.girlthi.ng:64738
+        interval: 10s
+        conditions:
+          - "[CONNECTED] == true"
+        group: "services"
+
+      - name: znc web ui
+        url: https://znc.girlthi.ng:1337
+        interval: 10s
+        conditions:
+          - "[STATUS] == 200"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+        group: "services"
+
+      - name: znc irc
+        url: tls://znc.girlthi.ng:6697
+        interval: 10s
+        conditions:
+          - "[CONNECTED] == true"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+        group: "services"
+
+      - name: bsky pds
+        url: https://bsky.doll.rehab/
+        interval: 10s
+        conditions:
+          - "[STATUS] == 200"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+        group: "services"
+
+      - name: pathetic.systems iceshrimp.net
+        url: https://pathetic.systems
+        interval: 10s
+        conditions:
+          - "[STATUS] == 200"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+        group: "services"
+
+      - name: tuwunel
+        url: https://matrix.garlic.social/
+        interval: 10s
+        conditions:
+          - "[STATUS] == 200"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+        group: "services"
+
+      - name: ~/tilde pages
+        url: https://girlthi.ng
+        interval: 10s
+        conditions:
+          - "[STATUS] == 200"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+        group: "services"
+
+      - name: doll.report tenants
+        url: https://girlthing.doll.report
+        interval: 10s
+        conditions:
+          - "[STATUS] == 200"
+          - "[CERTIFICATE_EXPIRATION] > 48h"
+        group: "services"
+
+      - name: desolate.girlthi.ng
+        url: icmp://desolate.girlthi.ng
+        interval: 10s
+        conditions:
+          - "[CONNECTED] == true"
+        group: "infrastructure"
+
+      - name: solitary.girlthi.ng
+        url: icmp://solitary.girlthi.ng
+        interval: 10s
+        conditions:
+          - "[CONNECTED] == true"
+        group: "infrastructure"
+
+      - name: windswept.girlthi.ng
+        url: icmp://windswept.girlthi.ng
+        interval: 10s
+        conditions:
+          - "[CONNECTED] == true"
+        group: "infrastructure"
+
+      - name: miserable.girlthi.ng
+        url: icmp://miserable.girlthi.ng
+        interval: 10s
+        conditions:
+          - "[CONNECTED] == true"
+        group: "infrastructure"
