@@ -36,4 +36,4 @@ jobs:
           ANSIBLE_HOST_KEY_CHECKING: False
 
         run: |
-          ansible-playbook -u ${{ secrets.ANSIBLE_USER }} -i doll.report, main.yaml
+          ansible-playbook -u ${{ secrets.ANSIBLE_USER }} --private-key ansible_key -i doll.report, main.yaml
