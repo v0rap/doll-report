@@ -1,23 +1,27 @@
 ---
-- name: ensure gatus config dir
+- name: Ensure gatus config dir
   ansible.builtin.file:
     path: /opt/gatus_config
+    mode: "644"
     state: directory
 
-- name: ensure gatus data dir
+- name: Ensure gatus data dir
   ansible.builtin.file:
     path: /opt/gatus_data
+    mode: "644"
     state: directory
 
-- name: ensure doll report config dir
+- name: Ensure doll report config dir
   ansible.builtin.file:
     path: /opt/doll.report.nginx.conf.d
     state: directory
+    mode: "644"
 
-- name: instance config files
+- name: Instance config files
   ansible.builtin.template:
     src: gatus_config.yaml.j2
     dest: /opt/gatus_config/{{ dashboard.key }}.yaml
+    mode: "644"
   loop: "{{ dashboards | dict2items }}"
   loop_control:
     loop_var: dashboard
@@ -26,7 +30,7 @@
   community.docker.docker_network:
     name: doll-report
 
-- name: ensure tenant dashboard gatus container
+- name: Ensure tenant dashboard gatus container
   community.docker.docker_container:
     name: "gatus-{{ dashboard.key }}"
     image: ghcr.io/twin/gatus:stable
@@ -34,7 +38,7 @@
     network_mode: "doll-report"
     restart_policy: "unless-stopped"
     recreate: false
-    restart:  true
+    restart: true
     volumes:
       - "/opt/gatus_config/{{ dashboard.key }}.yaml:/config/config.yaml"
       - "/opt/gatus_data/{{ dashboard.key }}/:/status_history/"
@@ -42,15 +46,16 @@
   loop_control:
     loop_var: dashboard
 
-- name: ensure nginx aggregator configuration
+- name: Ensure nginx aggregator configuration
   ansible.builtin.template:
     src: nginx_server.conf.j2
     dest: /opt/doll.report.nginx.conf.d/{{ dashboard.key }}.conf
+    mode: "644"
   loop: "{{ dashboards | dict2items }}"
   loop_control:
     loop_var: dashboard
 
-- name: ensure nginx aggregator container
+- name: Ensure nginx aggregator container
   community.docker.docker_container:
     name: "nginx-doll-report"
     image: nginx:latest
