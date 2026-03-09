@@ -5,6 +5,13 @@ on:
   pull_request:
 
 jobs:
-  ansible-lint:
-    uses: ansible/ansible-content-actions/.github/workflows/ansible_lint.yaml@main
-
+  lint:
+    name: Ansible Lint # Naming the build is important to use it as a status check
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint@main # or vX.X.X version
+        with:
+          setup_python: "true"
+          python_version: "3.14"
