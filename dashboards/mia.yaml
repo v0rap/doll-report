@@ -1,0 +1,29 @@
+---
+dashboards:
+  mia:
+    ui:
+      title: "mia status"
+      header: "mia status"
+      dashboard-subheading: "mia status"
+      logo: "https://static-cdn.jtvnw.net/jtv_user_pictures/a78a5941-2248-4014-9519-00e52d65348b-profile_image-70x70.png"
+      favicon:
+        default: "https://static-cdn.jtvnw.net/jtv_user_pictures/a78a5941-2248-4014-9519-00e52d65348b-profile_image-70x70.png"
+        size16x16: "https://static-cdn.jtvnw.net/jtv_user_pictures/a78a5941-2248-4014-9519-00e52d65348b-profile_image-70x70.png"
+        size32x32: "https://static-cdn.jtvnw.net/jtv_user_pictures/a78a5941-2248-4014-9519-00e52d65348b-profile_image-70x70.png"
+
+    storage:
+      type: sqlite
+      caching: true
+      path: /status_history/history.db
+
+    announcements:
+      - timestamp: 2026-03-09T12:34:56Z
+        type: information
+        message: ":wahoo:"
+
+    endpoints:
+      - name: the shrimp
+        url: https://void.rehab
+        interval: 10s
+        conditions:
+          - "[STATUS] == 200"
