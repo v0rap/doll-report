@@ -1,0 +1,64 @@
+ui:  # web-ui configuration, see it applied at https://girlthing.doll.report
+  title: "girlthi.ng status"  # <title/> tag 
+  header: "girlthing.doll.report"  # dashboard <h1>
+  dashboard-subheading: "Service Status"  # dashboard <h2>
+  logo: "https://girlthi.ng/~aperture/img/girlthing-heart.png"  # web ui main logo
+  favicon:  # favico
+    default: "https://girlthi.ng/~aperture/img/girlthing-heart.png"
+    size16x16: "https://girlthi.ng/~aperture/img/girlthing-heart.png"
+    size32x32: "https://girlthi.ng/~aperture/img/girlthing-heart.png"
+  default-sort-by: group
+  custom-css: |2  # dashboard custom css
+    body {
+      font-family: monospace;
+    }
+
+storage:  # configure persistant history storage
+  type: sqlite
+  caching: true
+  path: /status_history/history.db  # keep as is!!
+
+endpoints:  # endpoints to probe. check gatus README.md for options
+  - name: mastodonskel
+    url: https://masto.doskel.net
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    group: "services"  # Optional group
+
+  - name: ircd
+    url: tls://doskel.net:6697
+    interval: 60s
+    conditions:
+      - "[CONNECTED] == true"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    group: "services"
+
+  - name: bsky pds
+    url: https://bsky.doskel.net
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    group: "services"
+
+  - name: main website
+    url: https://doskel.net/DSKLwiki
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+    group: "services"
+  - name: xmpp server
+    url: tls://doskel.net:5223
+    interval: 60s
+    conditions:
+      - "[CONNECTED] == true"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    group: "services"
+
+  - name: matrix server
+    url: https://doskel.net:8448/
+    conditions:
+      - "[STATUS] == 200"
+    group: "services"
