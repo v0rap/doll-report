@@ -17,7 +17,9 @@ make sure your branch passes this or the merge request will not be approved. the
 The `<dashboard_name>.yaml` files contain [gatus](https://github.com/TwiN/gatus) configuration.
 
 The filename (excluding `.yaml`) will be used as the subdomain for the dashboard,
-your instance will be available at `https://<name of dashboard>.doll.report`
+your instance will be available at `https://<name of dashboard>.doll.report`.
+
+Feel free to customize the ui section to your desire within your own defintion file !! :)
 
 
 ## Rules
