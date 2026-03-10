@@ -1,0 +1,11 @@
+storage:
+  type: sqlite
+  caching: true
+  path: /status_history/history.db
+
+endpoints:
+  - name: fox.nexus fedi instance
+    url: https://fox.nexus
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
