@@ -103,21 +103,21 @@ endpoints:  # endpoints to probe. check gatus README.md for options
     group: "web"
 
   - name: hive router [ipv4]
-    url: icmp://dead.dolly.sh/
+    url: icmp://dead.dolly.sh
     interval: 10s
     conditions:
       - "[CONNECTED] == true"
     group: "infrastructure"
   
   - name: hive router [ipv6-att]
-    url: icmp://2600:1700:6850:b49f::dead:d011/
+    url: icmp://[2600:1700:6850:b49f::dead:d011]
     interval: 10s
     conditions:
       - "[CONNECTED] == true"
     group: "infrastructure"
   
   - name: hive router [ipv6-prey]
-    url: icmp://2a14:6f44:a2c2::1/
+    url: icmp://[2a14:6f44:a2c2::1]
     interval: 10s
     conditions:
       - "[CONNECTED] == true"
