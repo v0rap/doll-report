@@ -60,6 +60,7 @@
     network_mode: "doll-report"
     volumes:
       - "/opt/doll.report.nginx.conf:/etc/nginx/nginx.conf"
+      - "/opt/doll-report-static:/static"
       - "/opt/doll.report.nginx.conf.d:/etc/nginx/conf.d"
     ports:
       - "127.0.0.1:8081:80"
