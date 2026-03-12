@@ -12,6 +12,15 @@ configuration file into the [dashboards/](dashboards/) folder, and have said gat
 When pushing to the repo [`yamllint`](https://github.com/adrienverge/yamllint) will be run,
 make sure your branch passes this or the merge request will not be approved. the `yamllint` package is available on PyPi
 
+You can validate your config using the go program in `scripts/`
+run it like this:
+
+```bash
+cd scripts
+go run validate-config.go ../dashboards/$your.yaml
+```
+it exits with error code 3 if the config could not be loaded.
+
 
 ## `<dashboard_name>.yaml` Definition
 The `<dashboard_name>.yaml` files contain [gatus](https://github.com/TwiN/gatus) configuration.
