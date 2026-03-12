@@ -47,6 +47,6 @@ jobs:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           echo $ALL_CAHNGED_FILES
-          # for file in ${ALL_CHANGED_FILES}; do
-          #   # ansible-playbook -u ${{ secrets.ANSIBLE_USER }} --private-key ansible_key -e="{}" -i doll.report, main.yaml
-          # done
+          for file in ${ALL_CHANGED_FILES}; do
+            ansible-playbook -u ${{ secrets.ANSIBLE_USER }} --private-key ansible_key -i doll.report, -e "{\"dashboard_list\": [\"$file\"]}" main.yaml
+          done
