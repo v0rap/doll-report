@@ -24,7 +24,7 @@ _variables:
     - "[CONNECTED] == true"
   - &domain_check
     - "[DOMAIN_EXPIRATION] > 720h"
-  - &interval_domaincheck 3d
+  - &interval_domaincheck 720h
 
 # leave as is
 storage:
