@@ -12,11 +12,11 @@ ui:  # web-ui configuration, feel free to change it !!
   title: "maecafe status"  # <title/> tag
   header: "maecafe"  # dashboard <h1>
   dashboard-subheading: "service status"  # dashboard <h2>
-  logo: "https://cdn.mae.wtf/maespacestation/logo.png"  # web ui main logo
-  favicon:  # favico
-    default: "https://cdn.mae.wtf/maespacestation/logo.png"
-    size16x16: "https://cdn.mae.wtf/maespacestation/logo.png"
-    size32x32: "https://cdn.mae.wtf/maespacestation/logo.png"
+  logo: "https://cdn.mae.wtf/maecafe/logo.png"  # web ui main logo
+  favicon:  # favicon
+    default: "https://cdn.mae.wtf/maecafe/logo.png"
+    size16x16: "https://cdn.mae.wtf/maecafe/logo.png"
+    size32x32: "https://cdn.mae.wtf/maecafe/logo.png"
   default-sort-by: group
   custom-css: |2  # dashboard custom css
     @import url(https://rsms.me/inter/inter.css);
