@@ -1,124 +1,191 @@
-ui:  # web-ui configuration, feel free to change it !!
-  title: "41666 status"  # <title/> tag
-  header: "41666.doll.report"  # dashboard <h1>
-  dashboard-subheading: "Service Status"  # dashboard <h2>
+ui: # web-ui configuration, feel free to change it !!
+  title: "41666 status" # <title/> tag
+  header: "41666.doll.report" # dashboard <h1>
+  dashboard-subheading: "41666's public network status (ps2.live, dolly.sh, dollnet)" # dashboard <h2>
+  logo: "https://noe.sh/yay/redheart.png"  # web ui main logo
+  favicon:  # favico
+    default: "https://noe.sh/yay/redheart.png"
+    size16x16: "https://noe.sh/yay/redheart.png"
+    size32x32: "https://noe.sh/yay/redheart.png"
   default-sort-by: group
-  custom-css: |2  # dashboard custom css
+  custom-css: |2 # dashboard custom css
     body {
-      font-family: monospace;
+      font-family: monospace, monospace;
+      text-transform: lowercase;
+      --background: 0 8% 8%;
+      --foreground: 0 8% 78%;
+      --muted-foreground: 0 8% 78%;
+      --card: 0 28% 10%;
+      --radius: 0;
+      --border: 0 0 0 / 0;
     }
 
-storage:  # configure persistant history storage
+    .bg-green-500 {
+      background-color: hsl(157.5 43.8% 25.1%/var(--tw-bg-opacity)) !important;
+    }
+
+    .text-green-600 {
+      color: hsl(157.5 45% 47%) !important;
+    }
+
+    .bg-red-500 {
+      background-color: rgb(128 44 44/var(--tw-bg-opacity)) !important;
+    }
+
+    .bg-red-600 {
+      background-color: rgb(128 44 44/var(--tw-bg-opacity)) !important;
+    }
+
+    .endpoint-group-content {
+      padding: 1rem 0 !important;
+    }
+
+_variables:
+  - &interval 60s
+  - &http_condition
+    - "[STATUS] == 200"
+    - "[CERTIFICATE_EXPIRATION] > 48h"
+  - &tls_condition
+    - "[CONNECTED] == true"
+    - "[CERTIFICATE_EXPIRATION] > 48h"
+  - &ping_condition
+    - "[CONNECTED] == true"
+
+storage: # configure persistant history storage
   type: sqlite
   caching: true
-  path: /status_history/history.db  # keep as is!!
+  path: /status_history/history.db # keep as is!!
 
-endpoints:  # endpoints to probe. check gatus README.md for options
-  - name: dis.sociat.ing
-    url: https://dis.sociat.ing
-    interval: 10s
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-    group: "services"  # Optional group
+endpoints: # endpoints to probe. check gatus README.md for options
+  ##
+  ## services (public heavy apps)
+  ##
 
-  - name: ircd
-    url: tls://irc.dolly.sh:6697
-    interval: 10s
-    conditions:
-      - "[CONNECTED] == true"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
+  - name: ci.dolly.sh (woodpecker)
+    url: https://ci.dolly.sh
+    interval: *interval
+    conditions: *http_condition
     group: "services"
 
-  - name: fileshare
+  - name: dis.sociat.ing (iceshrimp)
+    url: https://dis.sociat.ing
+    interval: *interval
+    conditions: *http_condition
+    group: "services"
+
+  - name: dripping.blood.pet (fileshare)
     url: https://dripping.blood.pet/s/
-    interval: 10s
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
+    interval: *interval
+    conditions: *http_condition
+    group: "services"
+
+  - name: git.dolly.sh (git forge)
+    url: https://git.dolly.sh
+    interval: *interval
+    conditions: *http_condition
+    group: "services"
+
+  - name: irc.dolly.sh (ircd)
+    url: tls://irc.dolly.sh:6697
+    interval: *interval
+    conditions: *tls_condition
+    group: "services"
+
+  - name: subby.blood.pet (nix cache)
+    url: https://subby.blood.pet/
+    interval: *interval
+    conditions: *http_condition
     group: "services"
 
   - name: xnfm ios proxy
     url: https://xnfm.blood.pet/
-    interval: 10s
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
+    interval: *interval
+    conditions: *http_condition
     group: "services"
 
-  - name: nix cache
-    url: https://subby.blood.pet/
-    interval: 10s
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-    group: "services"
-
+  ##
+  ## ps2.live
+  ##
   - name: ps2.live
     url: https://ps2.live/
-    interval: 10s
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-    group: "services"
+    interval: *interval
+    conditions: *http_condition
+    group: "ps2.live"
 
-  - name: git.dolly.sh
-    url: https://git.dolly.sh
-    interval: 10s
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-    group: "services"
+  - name: agg.ps2.live
+    url: https://agg.ps2.live/
+    interval: *interval
+    conditions: *http_condition
+    group: "ps2.live"
+
+  - name: metagame.ps2.live
+    url: https://metagame.ps2.live/
+    interval: *interval
+    conditions: *http_condition
+    group: "ps2.live"
+
+  - name: saerro.ps2.live
+    url: https://saerro.ps2.live/
+    interval: *interval
+    conditions: *http_condition
+    group: "ps2.live"
+
+  - name: kerykeion.ps2.live
+    url: https://kerykeion.ps2.live/
+    interval: *interval
+    conditions: *http_condition
+    group: "ps2.live"
+
+  ##
+  ## static-sites
+  ##
+  - name: blood.pet
+    url: https://blood.pet/
+    interval: *interval
+    conditions: *http_condition
+    group: "static-sites"
 
   - name: doll.repair
     url: https://doll.repair/
-    interval: 10s
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-    group: "web"
-  
+    interval: *interval
+    conditions: *http_condition
+    group: "static-sites"
+
   - name: noe.sh
     url: https://noe.sh/
-    interval: 10s
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-    group: "web"
+    interval: *interval
+    conditions: *http_condition
+    group: "static-sites"
 
   - name: 3d.noe.sh
     url: https://3d.noe.sh/
-    interval: 10s
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-    group: "web"
+    interval: *interval
+    conditions: *http_condition
+    group: "static-sites"
 
-  - name: blood.pet
-    url: https://blood.pet/
-    interval: 10s
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-    group: "web"
+  ##
+  ## infra
+  ##
+  - name: hive router [dns]
+    url: icmp://dead.dolly.sh
+    interval: *interval
+    conditions: *ping_condition
+    group: "infrastructure"
 
   - name: hive router [ipv4]
-    url: icmp://dead.dolly.sh
-    interval: 10s
-    conditions:
-      - "[CONNECTED] == true"
+    url: icmp://70.236.146.149
+    interval: *interval
+    conditions: *ping_condition
     group: "infrastructure"
-  
+
   - name: hive router [ipv6-att]
-    url: icmp://[2600:1700:6850:b49f::dead:d011]
-    interval: 10s
-    conditions:
-      - "[CONNECTED] == true"
+    url: tcp://[2600:1700:6850:b49f::dead:d011]:80
+    interval: *interval
+    conditions: *ping_condition
     group: "infrastructure"
-  
+
   - name: hive router [ipv6-prey]
-    url: icmp://[2a14:6f44:a2c2::1]
-    interval: 10s
-    conditions:
-      - "[CONNECTED] == true"
+    url: tcp://[2a14:6f44:a2c2::dead:d011]:80
+    interval: *interval
+    conditions: *ping_condition
     group: "infrastructure"
