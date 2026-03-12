@@ -76,7 +76,7 @@ endpoints:
       - type: discord
 
   - name: periwinkle
-    url: https://pwkl.maecafe.link:8889
+    url: http://pwkl.maecafe.link:8889
     ui:
       hide-port: true
     interval: *interval
