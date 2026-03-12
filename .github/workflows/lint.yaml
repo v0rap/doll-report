@@ -27,7 +27,5 @@ jobs:
           set -e
           for file in ./dashboards/*.yaml; do
             echo Checking $file
-            cat $file | grep '${' | awk '{ print $2 }' | sed -e 's_${__' | sed -e 's_}__' | awk '{ print "export " $1 "=http://invalid" }' > shimed_secrets
-            source shimed_secrets
             ./scripts/validate-config $file
           done
