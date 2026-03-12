@@ -37,7 +37,7 @@ We provide the following variables for email alert config:
 - `DOLL_REPORT_SMTP_PASSWORD`
 - `DOLL_REPORT_SMTP_HOST` 
 
-Usage:
+Usage: (see https://github.com/TwiN/gatus?tab=readme-ov-file#configuring-email-alerts for full usage information)
 ```yaml
 alerting:
   email:
@@ -47,6 +47,7 @@ alerting:
     host: ${DOLL_REPORT_SMTP_PASSWORD}
     port: 587
     to: "myemail@goes.here"  # use a user-defined secret if you don't want to expose your email publically
+    [ ... snip ... ]
 ```
 
 ## User-Defined Secret Variables
