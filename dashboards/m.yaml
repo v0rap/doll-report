@@ -1,3 +1,18 @@
+_variables:
+  - &interval 60s
+  - &endpoint_default
+    interval: *interval
+  - &condition_http
+    - "[STATUS] == 200"
+    - "[RESPONSE_TIME] < 300"
+  - &condition_https
+    - "[STATUS] == 200"
+    - "[RESPONSE_TIME] < 300"
+    - "[CERTIFICATE_EXPIRATION] > 48h"
+  - &condition_ping
+    - "[CONNECTED] == true"
+
+
 ui:
   title: "m status"
   header: "m.doll.report"
@@ -20,48 +35,42 @@ storage:
   path: /status_history/history.db
 
 endpoints:
-  - name: website
+  - <<: *endpoint_default
+    name: website
     url: https://theverygaming.furrypri.de
-    interval: 15s
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
+    conditions: *condition_https
     group: "services"
 
-  - name: website (HTTP)
+  - <<: *endpoint_default
+    name: website (HTTP)
     url: http://http.theverygaming.furrypri.de
-    interval: 15s
-    conditions:
-      - "[STATUS] == 200"
+    conditions: *condition_http
     group: "services"
 
-  - name: website (redirect)
+  - <<: *endpoint_default
+    name: website (redirect)
     url: https://m.furrypri.de
-    interval: 15s
-    conditions:
-      - "[STATUS] == 200"
+    conditions: *condition_https
     group: "services"
 
-  - name: theverygaming.furrypri.de authoritative DNS 1
+  - <<: *endpoint_default
+    name: theverygaming.furrypri.de authoritative DNS 1
     url: "ns1.theverygaming.furrypri.de"
     dns:
       query-name: "ns1.theverygaming.furrypri.de"
       query-type: "A"
-    interval: 15s
     conditions:
       - "[DNS_RCODE] == NOERROR"
     group: "infrastructure"
 
-  - name: vps-1
+  - <<: *endpoint_default
+    name: vps-1
     url: icmp://vps-1.infra.theverygaming.furrypri.de
-    interval: 15s
-    conditions:
-      - "[CONNECTED] == true"
+    conditions: *condition_ping
     group: "infrastructure"
 
-  - name: vps-old
+  - <<: *endpoint_default
+    name: vps-old
     url: icmp://vps-old.infra.theverygaming.furrypri.de
-    interval: 15s
-    conditions:
-      - "[CONNECTED] == true"
+    conditions: *condition_ping
     group: "infrastructure"
