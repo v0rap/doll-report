@@ -1,12 +1,12 @@
-ui:  # web-ui configuration, see it applied at https://girlthing.doll.report
-  title: "girlthi.ng status"  # <title/> tag 
-  header: "girlthing.doll.report"  # dashboard <h1>
+ui:
+  title: "DOSKEL Networks Status"  # <title/> tag 
+  header: "doskel.doll.report"  # dashboard <h1>
   dashboard-subheading: "Service Status"  # dashboard <h2>
-  logo: "https://girlthi.ng/~aperture/img/girlthing-heart.png"  # web ui main logo
+  logo: "https://assets.doskel.net/img/favicon.png"  # web ui main logo
   favicon:  # favico
-    default: "https://girlthi.ng/~aperture/img/girlthing-heart.png"
-    size16x16: "https://girlthi.ng/~aperture/img/girlthing-heart.png"
-    size32x32: "https://girlthi.ng/~aperture/img/girlthing-heart.png"
+    default: "https://assets.doskel.net/img/favicon.png"
+    size16x16: "https://assets.doskel.net/img/favicon.png"
+    size32x32: "https://assets.doskel.net/img/favicon.png"
   default-sort-by: group
   custom-css: |2  # dashboard custom css
     body {
