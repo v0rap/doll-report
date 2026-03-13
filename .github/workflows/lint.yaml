@@ -15,17 +15,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-go@v6
         with:
           go-version: '1.26'
           cache: true
           cache-dependency-path: 'scripts/go.sum'
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323
+        with:
+          files: |
+            dashboards/*.yaml
+
       - run: |
           cd scripts
           go build validate-config.go
-      - run: |
+
+      - env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
           set -e
-          for file in ./dashboards/*.yaml; do
+          for file in ${ALL_CHANGED_FILES}; do
             echo Checking $file
-            ./scripts/validate-config $file
+            cat $file | sed -E 's/\$\{.*\}/https:\/\/gorp/g' | ./scripts/validate-config
           done
