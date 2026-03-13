@@ -17,7 +17,10 @@ run it like this:
 
 ```bash
 cd scripts
-go run validate-config.go ../dashboards/$your.yaml
+cat ../dashboards/$your.yaml | go run validate-config.go
+# OR if you have environment variables in the config that aren't defined in your environment
+cat ../dashboards/$your.yaml | sed -E 's/\$\{.*\}/https:\/\/gorp/g' | go run validate-config.go
+
 ```
 it exits with error code 3 if the config could not be loaded.
 
