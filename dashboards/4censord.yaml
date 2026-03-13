@@ -17,7 +17,7 @@ alerting:
     password: ${DOLL_REPORT_SMTP_PASSWORD}
     host: ${DOLL_REPORT_SMTP_PASSWORD}
     port: 587
-    to: ${4CENSORD_ALERTING_EMAIL}
+    to: ${FOURCENSORD_ALERTING_EMAIL}
     failure-threshold: 10
 
 # Shamelessly copied from 41666s' configuration
