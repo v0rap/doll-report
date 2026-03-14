@@ -20,10 +20,14 @@ ui:
   dashboard-subheading: "PING doasu.dev (2.1.3.7) 56(84) bytes of data."  # dashboard <h2>
   default-sort-by: group
   custom-css: |2  # dashboard custom css
+    * {
+      border-radius: unset !important;
+    }
     body {
       font-family: monospace;
     }
     .text-green-600 { color: rgb(119 170 153/var(--tw-text-opacity)) !important }
+    .bg-green-500 { background-color: rgb(88 126 113/var(--tw-bg-opacity)) !important }
 
   dark-mode: false # don't use dark mode by default
 
