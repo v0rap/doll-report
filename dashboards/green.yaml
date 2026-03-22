@@ -134,8 +134,14 @@ endpoints:
     conditions: *http_condition
     group: "cobble services"
 
-  - name: index.cobble.cat
-    url: https://index.cobble.cat/
+  - name: snacking.cobble.cat
+    url: https://snacking.cobble.cat/
+    interval: *interval
+    conditions: *http_condition
+    group: "cobble services"
+
+  - name: vita.cobble.cat
+    url: https://vita.cobble.cat/
     interval: *interval
     conditions: *http_condition
     group: "cobble services"
