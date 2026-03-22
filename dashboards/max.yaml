@@ -1,0 +1,70 @@
+ui:
+  title: "maxine naomi lunaris ✦"  # <title/> tag 
+  header: "max.doll.report"  # dashboard <h1>
+  dashboard-subheading: "Service Status"  # dashboard <h2>
+  logo: "https://popbob.wtf/avatars/a9eyxm3y0qxmyf5n/ahs7w0s7ywreh49j"  # web ui main logo
+  favicon:  # favico
+    default: "https://popbob.wtf/avatars/a9eyxm3y0qxmyf5n/ahs7w0s7ywreh49j"
+    size16x16: "https://popbob.wtf/avatars/a9eyxm3y0qxmyf5n/ahs7w0s7ywreh49j"
+    size32x32: "https://popbob.wtf/avatars/a9eyxm3y0qxmyf5n/ahs7w0s7ywreh49j"
+  default-sort-by: group
+  custom-css: |2
+    body {
+      font-family: monospace;
+    }
+
+storage:  # configure persistant history storage
+  type: sqlite
+  caching: true
+  path: /status_history/history.db  # keep as is!!
+
+endpoints:  # endpoints to probe. check gatus README.md for options
+  ## static websites
+  - name: website
+    url: https://woof.monster
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+    group: "static websites"  # Optional group
+
+  ## personal services
+  - name: bitwarden
+    url: https://pass.woof.monster
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    group: "personal services"
+
+  - name: catask
+    url: https://ask.woof.monster
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    group: "personal services"
+
+  ## services
+  - name: akkoma
+    url: https://akko.woof.monster
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    group: "services"
+
+  - name: cobalt frontend
+    url: https://dl.woof.monster
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    group: "services"
+  
+  - name: cobalt api
+    url: https://api.dl.woof.monster
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    group: "services"
