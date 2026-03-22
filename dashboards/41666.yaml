@@ -170,26 +170,46 @@ endpoints: # endpoints to probe. check gatus README.md for options
   ##
   ## infra
   ##
-  - name: hive router [dns]
+  # -- cute closet box
+  - name: dead.dolly.sh [dns]
     url: icmp://dead.dolly.sh
     interval: *interval
     conditions: *ping_condition
     group: "infrastructure"
 
-  - name: hive router [ipv4]
+  - name: dead.dolly.sh [ipv4]
     url: icmp://70.236.146.149
     interval: *interval
     conditions: *ping_condition
     group: "infrastructure"
 
-  - name: hive router [ipv6-att]
+  - name: dead.dolly.sh [ipv6-att]
     url: tcp://[2600:1700:6850:b49f::dead:d011]:80
     interval: *interval
     conditions: *ping_condition
     group: "infrastructure"
 
-  - name: hive router [ipv6-prey]
+  - name: dead.dolly.sh [ipv6-prey]
     url: tcp://[2a14:6f44:a2c2::dead:d011]:80
+    interval: *interval
+    conditions: *ping_condition
+    group: "infrastructure"
+
+  # -- netcup
+  - name: still.dolly.sh [dns]
+    url: icmp://still.dolly.sh
+    interval: *interval
+    conditions: *ping_condition
+    group: "infrastructure"
+
+  - name: still.dolly.sh [ipv4]
+    url: icmp://159.195.46.64
+    interval: *interval
+    conditions: *ping_condition
+    group: "infrastructure"
+
+  - name: still.dolly.sh [ipv6]
+    url: tcp://[2a0a:4cc0:c1:94b6::0]:80
     interval: *interval
     conditions: *ping_condition
     group: "infrastructure"
