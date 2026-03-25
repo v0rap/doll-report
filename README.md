@@ -56,7 +56,7 @@ alerting:
     from: "{any name}@doll.report"
     username: ${DOLL_REPORT_SMTP_USERNAME}
     password: ${DOLL_REPORT_SMTP_PASSWORD}
-    host: ${DOLL_REPORT_SMTP_PHOST}
+    host: ${DOLL_REPORT_SMTP_HOST}
     port: 587
     to: "myemail@goes.here"  # use a user-defined secret if you don't want to expose your email publicly
     [ ... snip ... ]
