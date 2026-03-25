@@ -35,7 +35,7 @@ your instance will be available at `https://<name of dashboard>.doll.report`.
 ## Rules
 - Keep your probe intervals above two seconds (this applies to everything apart from domain expiration probes)
 - Don't keep excessive history data (leave `storage.maximum-number-of-results` and
-  `storage.maximum-number-of-events` at deafult unless absolutely required)
+  `storage.maximum-number-of-events` at default unless absolutely required)
 - Domain expiration probe intervals not allowed to be lower than 30 minutes between requests.
   (See more info here: https://github.com/TwiN/gatus?tab=readme-ov-file#monitoring-domain-expiration)
 
@@ -56,15 +56,15 @@ alerting:
     from: "{any name}@doll.report"
     username: ${DOLL_REPORT_SMTP_USERNAME}
     password: ${DOLL_REPORT_SMTP_PASSWORD}
-    host: ${DOLL_REPORT_SMTP_PASSWORD}
+    host: ${DOLL_REPORT_SMTP_PHOST}
     port: 587
-    to: "myemail@goes.here"  # use a user-defined secret if you don't want to expose your email publically
+    to: "myemail@goes.here"  # use a user-defined secret if you don't want to expose your email publicly
     [ ... snip ... ]
 ```
 
 ## User-Defined Secret Variables
 
-### Transparancy
+### Transparency
 
 > [!CAUTION]
 > The following section is kind of important, so please read it in its entirety.
@@ -78,7 +78,7 @@ Also note thermia will have to read the env files to ensure nothing malicious is
 If there are any concerns don't hesitate to reach out to thermia, either through
 already established channels or a github issue.
 
-### `age` asymetrical encryption
+### `age` asymmetrical encryption
 
 To keep alert configuration private, users can use
 [`age`](https://github.com/FiloSottile/age) to encrypt an environment file and
