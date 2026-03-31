@@ -75,14 +75,6 @@ endpoints:
       - "[STATUS] == 200"
       - "[BODY].status == OK"
     group: internal
-
-  - name: media-sound/navidrome
-    url: https://listen.doasu.dev/ping
-    conditions:
-      - "[STATUS] == 200"
-      - "[BODY] == ."
-    group: internal
-
       
     #######################
     # WWW-APPS/CODELIRIUM #
