@@ -1,0 +1,200 @@
+alerting:
+  ntfy:
+    url: "https://ntfy.ilyamikcoder.com"
+    topic: "doll-report"
+    token: ${NTFY_TOKEN}
+    default-alert:
+      failure-threshold: 3
+      send-on-resolved: true
+
+ui:  # web-ui configuration, feel free to change it !!
+  title: "Checksum Cooperative"  # <title/> tag
+  header: "checksum.doll.report"  # dashboard <h1>
+  dashboard-subheading: "Service Status"  # dashboard <h2>
+  logo: "https://mk.ilyamikcoder.com/files/e98b3f02-47c4-43da-9100-13e9299f44c0.png"  # web ui main logo
+  favicon:  # favico
+    default: "https://mk.ilyamikcoder.com/files/e98b3f02-47c4-43da-9100-13e9299f44c0.png"
+    size16x16: "https://mk.ilyamikcoder.com/files/e98b3f02-47c4-43da-9100-13e9299f44c0.png"
+    size32x32: "https://mk.ilyamikcoder.com/files/e98b3f02-47c4-43da-9100-13e9299f44c0.png"
+  default-sort-by: group
+  custom-css: |2  # dashboard custom css
+    body {
+      font-family: Hack, Consolas, monospace;
+    }
+
+storage:  # configure persistant history storage
+  type: sqlite
+  caching: true
+  path: /status_history/history.db  # keep as is!!
+
+endpoints:  # endpoints to probe. check gatus README.md for options
+  - name: sharkey
+    url: https://mk.ilyamikcoder.com
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#0 - services"
+    alerts:
+      - type: ntfy
+
+  - name: matrix
+    url: https://ilyamikcoder.com/_synapse/health
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+      - "[BODY] == OK"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#0 - services"
+    alerts:
+      - type: ntfy
+
+  - name: matrix (element)
+    url: https://matrix.ilyamikcoder.com
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#0 - services"
+    alerts:
+      - type: ntfy
+
+  - name: peertube
+    url: https://pt.ilyamikcoder.com
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#0 - services"
+    alerts:
+      - type: ntfy
+
+  - name: cryptpad
+    url: https://cpm.ilyamikcoder.com
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#0 - services"
+    alerts:
+      - type: ntfy
+
+  - name: gitea
+    url: https://git.ilyamikcoder.com
+    interval: 20s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#0 - services"
+    alerts:
+      - type: ntfy
+
+  - name: email (mailcow)
+    url: https://mail.ilyamikcoder.com
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#0 - services"
+    alerts:
+      - type: ntfy
+
+  - name: wiki
+    url: https://wiki.ilyamikcoder.com
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#0 - services"
+    alerts:
+      - type: ntfy
+
+  - name: rei3
+    url: https://i.ilyamikcoder.com/
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#1 - internal"
+    alerts:
+      - type: ntfy
+
+  - name: ntfy
+    url: https://ntfy.ilyamikcoder.com/
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#1 - internal"
+    alerts:
+      - type: ntfy # not particularly helpful, eh?
+
+  - name: privatebin
+    url: https://pb.ilyamikcoder.com/
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#1 - internal"
+    alerts:
+      - type: ntfy
+
+  - name: node-red
+    url: https://node.ilyamikcoder.com/
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#1 - internal"
+    alerts:
+      - type: ntfy
+
+  - name: szurubooru
+    url: https://stash.ilyamikcoder.com/
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#1 - internal"
+    alerts:
+      - type: ntfy
+
+  - name: copyparty
+    url: https://copy.ilyamikcoder.com/
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#1 - internal"
+    alerts:
+      - type: ntfy
+
+  - name: syncthing
+    url: https://st.ilyamikcoder.com/
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#1 - internal"
+    alerts:
+      - type: ntfy
+
+  - name: ilyamikcoder.com
+    url: https://ilyamikcoder.com
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#2 - personal sites"
+    alerts:
+      - type: ntfy
+
+  - name: Uptime Kuma (nothing.run)
+    url: https://uptime.nothing.run/
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 12h"
+    group: "#3 - hosted for others"
+    alerts:
+      - type: ntfy
