@@ -101,7 +101,7 @@ endpoints:
     group: www-apps/codelirium
 
   - name: codelirium[ssh]
-    url: "ssh://code.doasu.dev:2222"
+    url: "ssh://code.doasu.dev"
     conditions:
       - "[STATUS] == 0"
       - "[CONNECTED] == true"
