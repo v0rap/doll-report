@@ -96,6 +96,20 @@ endpoints:
     client:
       network: ipv4
 
+  - name: ruby.infra.4censord.cloud - ipv6
+    url: icmp://ruby.infra.4censord.cloud
+    interval: *interval
+    conditions: *ping_condition
+    group: hosts
+    client:
+      network: ipv6
+  - name: ruby.infra.4censord.cloud - ipv4
+    url: icmp://ruby.infra.4censord.cloud
+    interval: *interval
+    conditions: *ping_condition
+    group: hosts
+    client:
+      network: ipv4
 
   #
   # Group "domains"
@@ -108,12 +122,13 @@ endpoints:
     conditions: *domain_check
     group: domains
     alerts: *alert_domain_expiration
-  - name: 4censord.de
-    url: icmp://4censord.de
-    interval: *interval_domaincheck
-    conditions: *domain_check
-    group: domains
-    alerts: *alert_domain_expiration
+  # Doesnt work currently, so its disabled for now
+  # - name: 4censord.de
+  #   url: icmp://4censord.de
+  #   interval: *interval_domaincheck
+  #   conditions: *domain_check
+  #   group: domains
+  #   alerts: *alert_domain_expiration
   - name: unfug.social
     url: icmp://unfug.social
     interval: *interval_domaincheck
