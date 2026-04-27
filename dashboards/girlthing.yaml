@@ -35,10 +35,29 @@ endpoints:  # endpoints to probe. check gatus README.md for options
     conditions:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 48h"
-    group: "services"  # Optional group
+    group: "services"
     alerts:
       - type: discord
 
+  - name: melon-ring-redirect
+    url: https://melon-ring.pathetic.systems/thermia/next
+    interval: 10s
+    conditions:
+      - "[STATUS] == 307"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    group: "services"
+    alerts:
+      - type: discord
+
+  - name: melon-ring-index
+    url: https://melon-ring.pathetic.systems/
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+    group: "services"
+    alerts:
+      - type: discord
 
   - name: ircd
     url: tls://irc.girlthi.ng:6697
