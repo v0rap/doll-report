@@ -45,6 +45,8 @@ endpoints:  # endpoints to probe. check gatus README.md for options
     conditions:
       - "[STATUS] == 307"
       - "[CERTIFICATE_EXPIRATION] > 48h"
+    client:
+      ignore-redirect: true
     group: "services"
     alerts:
       - type: discord
