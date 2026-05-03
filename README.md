@@ -1,5 +1,9 @@
 # doll.report
 
+> [!WARNING]
+> # THIS REPEO HAS MOVED TO [codeberg.org:thermia/doll-report](https://codeberg.org/thermia/doll-report)
+
+
 ## What is `doll.report`?
 doll.report is a communal infrastructure project, providing a platform for independent uptime tracking
 (and downtime alerts) of infrastructure and services.
