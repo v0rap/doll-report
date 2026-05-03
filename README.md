@@ -1,7 +1,7 @@
 # doll.report
 
 > [!WARNING]
-> # THIS REPEO HAS MOVED TO [codeberg.org:thermia/doll-report](https://codeberg.org/thermia/doll-report)
+> # THIS REPO HAS MOVED TO [codeberg.org:thermia/doll-report](https://codeberg.org/thermia/doll-report)
 
 
 ## What is `doll.report`?
